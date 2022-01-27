@@ -1,4 +1,14 @@
+---
+title: "Test symbols"
+date: '2021-10-23'
 header-includes: \usepackage{amsmath} \usepackage{amssymb} 
+
+output:
+  pdf_document:
+    latex_engine: xelatex
+  html_document:
+    df_print: paged
+---
 
 # static_temporal_embedding
 
