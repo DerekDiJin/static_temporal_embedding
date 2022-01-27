@@ -5,7 +5,7 @@ The code repository for the following paper:
 **Paper**: Di Jin, Ryan Rossi, Sungchul Kim and Danai Koutra. On Generalizing Static Node Embedding to Dynamic Settings. The Fifteenth International Conference on Web Search and Data Mining (WSDM), Phoenix, AZ, USA, Feb. 2022.
 
 <p align="center">
-<img src="https://derekdijin.github.io/assets/projects/overview_up_up.jpg" width="550"  alt="Framework overview">
+<img src="https://derekdijin.github.io/blob/master/assets/projects/overview_up_up.jpg" width="550"  alt="Framework overview">
 </p>
 
 
