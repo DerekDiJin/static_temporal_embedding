@@ -1261,7 +1261,13 @@ if __name__ == '__main__':
 
 	if emb_combining:
 		embedding_dict = combine_embedding(sub_dir, emb_dir, (train_num), embed_method, num_nodes, K, mod_emb_str)
-		output_file_path = 'emb' + ITER + '/' + input_file_path.split('/')[-1].split('.')[-2] + '_' + embed_method +  '_' + split_mod + mod_emb_str
+
+		output_emb_dir = 'emb' + ITER + '/'
+
+		if not os.path.exists(output_emb_dir):
+			os.mkdir(output_emb_dir)
+
+		output_file_path = output_emb_dir + input_file_path.split('/')[-1].split('.')[-2] + '_' + embed_method +  '_' + split_mod + mod_emb_str
 		write_embedding(embedding_dict, output_file_path, num_nodes)
 
 	
