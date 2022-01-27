@@ -58,7 +58,7 @@ which will run
  The complete list of argumments of this script are described as follows.
 
 - [temp_model] denotes the specific temporal network model. It supports ```<snapshot>``` and ```<trg>```. To employ the TSG model, one can run our preprocessing code to get one aggregated summary graph and then use the selected embedding approach.
-- [graph_series] denotes the graph time-series. It supports ```<TS>``` ( $\tau$ -graph) and ```<NS>``` ($\epsilon$-graph).
+- [graph_series] denotes the graph time-series. It supports ```<TS>( $\tau$ -graph)``` and ```<NS>``` ($\epsilon$-graph).
 - [static_method] is the name of static embedding approach. Our code supports the following methods, the original code repo should be placed under ```eval/``` directory. The example code of MultiLens is placed there.
 ```struc2vec/graphwave/node2vec/line/struc2vec/multilens/role2vec/graphwave/g2g```
 - [initial_snapshot_id] is the specific snapshot id in the graph time-series to start getting the embeddings.
