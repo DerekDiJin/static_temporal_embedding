@@ -1,3 +1,5 @@
+header-includes: \usepackage{amsmath} \usepackage{amssymb} 
+
 # static_temporal_embedding
 
 The code repository for the following paper:
