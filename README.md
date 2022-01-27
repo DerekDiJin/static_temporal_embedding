@@ -25,35 +25,25 @@ Di Jin, Mark Heimann, Ryan A. Rossi, and Danai Koutra. "Node2BITS: Compact Time-
 
 # Code
 
+This repository contains an example to adopt MultiLens as the static embedding approach to obtain the dynamic embeddings.
+
 ## Inputs:
 
-node2bits takes two files as input, the graph file and the category file.
+MultiLens takes two files as input, the graph file and the category file. The input files are placed under ```small_graphs_lp_time/``` directory.
 
 ### Input graph file
 The input graph file can be either static or temporal edge list in the following format separated by tab:
 ```
 <src> <dst> <weight> <timestamp> (optional)
 ```
-node2bits will automatically determine if the input graph is static or temporal. The edge list is assumed to be re-ordered consecutively from 0, i.e., the minimum node ID is 0, and the maximum node ID is <#node - 1>. A toy static graph is under "/graph/" directory.
+The edge list is assumed to be re-ordered consecutively from 0, i.e., the minimum node ID is 0, and the maximum node ID is <#node - 1>. Some preprocess files are placed under the ```preprocess/``` directory.
 
 ### Input category file
 The category file is a mapping between the node ID and its type (e.g., IP, cookie, web agent) with the following format separated by tab:
 ```
 <category> <id_initial> <id_ending>
 ```
-if the node IDs are grouped by the type, where ```<id_initial>``` and ```<id_ending>``` are the starting and ending node ids in type ```<category>```
-For example,
-```
-0	0	279629
-1	279630	283182
-```
-means node 0, 1, ... 279629 are in type 0, node 279630, 279631, ... 283182 are in type 1.
-
-But if the node IDs are not grouped by the types, this implementation also supports the following format separated by tab:
-```
-<category> <node_id>
-```
-which is just the 1-1 mapping. The code accepts either format.
+To run MultiLens correctly, each subgraph file should have its corresponding category file. But this is not required for most other methods such as node2vec, struc2vec, etc.
 
 ## Usage
 
@@ -62,25 +52,19 @@ To run the framework based on the predefined static embedding approach, an examp
 ```
 ./main.sh
 ```
+which will run 
+```main_split_heuristics.py [temp_model] [graph_series] [static_method] [initial_snapshot_id] [agg_factor] [train_num] [test_num] [time_scale] [iteration_id]```
 
-- input, the input graph file stated under the "Graph Input" section above. Default value: '../graph/test.tsv'
-- cat, the input category file stated under the "Graph Input" section above. Default value: '../graph/test_cat.tsv'
-- attri, the optional input node attribute file. See the exemplar input file for reference: '../graph/test_attri.tsv'. Default value: None
-- output, the ouput file of the embedding, which is non-sparse and node-wise binary hashcode. Default value: '../emb/test_emb.txt'
-- dim, the dimension of the embedding. Default value: 128
-- scope, the maximum temporal distance to consider. Default value: 3
-- base, the base constant of logarithm binning. Default value: 4
-- walk_num, the number of temporal random walk to perform per node. Default value: 10
-- walk_length, the length of the temporal random walk. Default value: 20
-- walk_mod, the bias of temporal random walk, can be ```<random>, <early>, <late>```. Default value: 'early'
-- ignore_time, a Boolean variable only used when running node2bits on a temporal input graph regardless of its time, i.e., only consider the first 3 columns of the temporal edgelist. Default value: False.
+ The complete list of argumments of this script are described as follows.
+
+- [temp_model] denotes the specific temporal network model. It supports ```<snapshot>``` and ```<trg>```. To employ the TSG model, one can run our preprocessing code to get one aggregated summary graph and then use the selected embedding approach.
+- [graph_series] denotes the graph time-series. It supports ```<TS>``` (\tau) and ```<NS>```
 
 ## Output
-The output dynamic embedding file is generated under the ```src/emb<iteration>/``` directory, where ```<iteration>``` is 
+The output dynamic embedding file is generated under the ```src/emb<iteration_id>/``` directory, where ```<iteration_id>``` denotes the specific run of experiments. The embedding file follows the general format:
 ```
-<bucket_id> [<node_id>]
+<node_id> [<embedding_values>]
 ```
-The hashtables are used to perform unsupervised identity stitching and can be used for AND/OR Amplification.
 
 
 # Question & troubleshooting
