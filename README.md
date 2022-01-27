@@ -1,15 +1,3 @@
----
-title: "Test symbols"
-date: '2021-10-23'
-header-includes: \usepackage{amsmath} \usepackage{amssymb} 
-
-output:
-  pdf_document:
-    latex_engine: xelatex
-  html_document:
-    df_print: paged
----
-
 # static_temporal_embedding
 
 The code repository for the following paper:
@@ -70,14 +58,14 @@ which will run
  The complete list of argumments of this script are described as follows.
 
 - [temp_model] denotes the specific temporal network model. It supports ```<snapshot>``` and ```<trg>```. To employ the TSG model, one can run our preprocessing code to get one aggregated summary graph and then use the selected embedding approach.
-- [graph_series] denotes the graph time-series. It supports ```<TS>``` ( $\tau$-graph) and ```<NS>``` ($\epsilon$-graph).
+- [graph_series] denotes the graph time-series. It supports ```<TS>``` ( &tau-graph) and ```<NS>``` (&epsilon-graph).
 - [static_method] is the name of static embedding approach. Our code supports the following methods, the original code repo should be placed under ```eval/``` directory. The example code of MultiLens is placed there.
 ```struc2vec/graphwave/node2vec/line/struc2vec/multilens/role2vec/graphwave/g2g```
 - [initial_snapshot_id] is the specific snapshot id in the graph time-series to start getting the embeddings.
 - [agg_factor] denotes the number of snapshots to aggregate. This is often used with [time_scale].
 - [train_num] denote the number of snapshots used to generate the dynamic node embeddings for the link prediction task. In our paper, we set [train_num] as ```6``` to get the dynamic node embeddings and predict links in the next snapshot.
 - [test_num] denotes the number of snapshots used for testing in the link prediction task.
-- [time_scale] denotes the time scale that corresponds to the $\tau$-graph. It supports ```day/month```. It is often coupled with [agg_factor] to denote other scales. For example, when denoting "week", [time_scale] is set ```day``` and [agg_factor] is set ```7```.
+- [time_scale] denotes the time scale that corresponds to the &tau$-graph. It supports ```day/month```. It is often coupled with [agg_factor] to denote other scales. For example, when denoting "week", [time_scale] is set ```day``` and [agg_factor] is set ```7```.
 - [iteration_id] denotes the specific run id. We conducted 3 runs for all experiments in our paper.
 
 
